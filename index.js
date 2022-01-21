@@ -1,28 +1,23 @@
 const PORT = 3000;
 const express = require('express');
-const bodyParser = require('body-parser');
+const apiRoute = require('./routes/api');
+const path = require('path');
 
 const app = express();
 
-let posts = [{
-    id: "Id Teste",
-    title: "Title Teste",
-    description: "Description Teste"
-},
-{
-    id: "Id Teste",
-    title: "Title Teste",
-    description: "Description Teste"
-}]
+/*let posts = [{
+    id: "TesteID",
+    title: "TesteTitle",
+    description: "TesteDescrição"
+}]*/
 
-app.get("/all", (req,res) =>{
-    res.json(JSON.stringify(posts))
-});
-
-app.post("/new", (req,res) =>{
-    
-})
+app.use(express.static(path.join(__dirname, "public")));
+app.use('/api', apiRoute);
 
 app.listen(PORT, () =>{
     console.log("Server rodando na porta:", PORT)
 })
+
+/*function generationID(){
+    return Math.random().toString(36).substr(2, 9);
+}*/
